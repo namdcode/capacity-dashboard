@@ -1,0 +1,274 @@
+@use '@angular/material' as mat;
+
+// ── Light theme (default) ──────────────────────────────────────────
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$violet-palette,
+        tertiary: mat.$cyan-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+// ── Dark theme ─────────────────────────────────────────────────────
+html.dark {
+  @include mat.theme(
+    (
+      color: (
+        theme-type: dark,
+        primary: mat.$violet-palette,
+        tertiary: mat.$cyan-palette,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+// ── Semantic design tokens ─────────────────────────────────────────
+:root {
+  // Content area background (slightly different from surface for depth)
+  --app-bg: #f4f2f7;
+  --app-sidebar-bg: #ffffff;
+  --app-toolbar-bg: rgba(255, 255, 255, 0.85);
+
+  // Card elevation
+  --app-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --app-card-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+  --app-card-shadow-lg: 0 4px 24px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.04);
+  --app-card-radius: 16px;
+  --app-card-radius-sm: 12px;
+
+  // Chart-aware colors
+  --app-chart-text: #5f6368;
+  --app-chart-grid: #e8e8e8;
+
+  // Heatmap palette
+  --app-heat-0: #f3f0f9;
+  --app-heat-1: #e0d4f5;
+  --app-heat-2: #b794f4;
+  --app-heat-3: #9775d4;
+  --app-heat-4: #6c3fc4;
+
+  // Status colors
+  --app-status-active: #1b8a2e;
+  --app-status-active-bg: rgba(27, 138, 46, 0.08);
+  --app-status-completed: #1565c0;
+  --app-status-completed-bg: rgba(21, 101, 192, 0.08);
+  --app-status-on-hold: #e65100;
+  --app-status-on-hold-bg: rgba(230, 81, 0, 0.08);
+  --app-status-at-risk: #c62828;
+  --app-status-at-risk-bg: rgba(198, 40, 40, 0.08);
+
+  // Revenue card
+  --app-revenue-bg: #e6f4ea;
+  --app-revenue-fg: #1b8a2e;
+
+  // Table
+  --app-table-header-bg: #faf8fd;
+  --app-table-row-hover: #f5f2fa;
+  --app-table-stripe: rgba(0, 0, 0, 0.015);
+
+  // Transition
+  --app-transition-speed: 200ms;
+  --app-transition-slow: 350ms;
+}
+
+html.dark {
+  --app-bg: #121218;
+  --app-sidebar-bg: #1a1a24;
+  --app-toolbar-bg: rgba(26, 26, 36, 0.9);
+
+  --app-card-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --app-card-shadow-hover: 0 10px 40px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(0, 0, 0, 0.3);
+  --app-card-shadow-lg: 0 4px 24px rgba(0, 0, 0, 0.3), 0 1px 4px rgba(0, 0, 0, 0.2);
+
+  --app-chart-text: #9e9e9e;
+  --app-chart-grid: #333;
+
+  --app-heat-0: #1e1c28;
+  --app-heat-1: #2d2645;
+  --app-heat-2: #4a3580;
+  --app-heat-3: #7c5cc7;
+  --app-heat-4: #b388ff;
+
+  --app-status-active: #66bb6a;
+  --app-status-active-bg: rgba(102, 187, 106, 0.12);
+  --app-status-completed: #42a5f5;
+  --app-status-completed-bg: rgba(66, 165, 245, 0.12);
+  --app-status-on-hold: #ffa726;
+  --app-status-on-hold-bg: rgba(255, 167, 38, 0.12);
+  --app-status-at-risk: #ef5350;
+  --app-status-at-risk-bg: rgba(239, 83, 80, 0.12);
+
+  --app-revenue-bg: rgba(102, 187, 106, 0.12);
+  --app-revenue-fg: #66bb6a;
+
+  --app-table-header-bg: #1e1c28;
+  --app-table-row-hover: #252333;
+  --app-table-stripe: rgba(255, 255, 255, 0.02);
+}
+
+// ── Body ───────────────────────────────────────────────────────────
+body {
+  background-color: var(--app-bg);
+  color: var(--mat-sys-on-surface);
+  font-family: 'Inter', 'Roboto', sans-serif;
+  font: var(--mat-sys-body-medium);
+  margin: 0;
+  height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color var(--app-transition-speed) ease,
+              color var(--app-transition-speed) ease;
+}
+
+// ── Global utility classes ─────────────────────────────────────────
+.page-container {
+  padding: 32px 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+  animation: fadeInUp 350ms ease-out;
+}
+
+.section-title {
+  font: var(--mat-sys-title-large);
+  margin: 0 0 16px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.chart-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+  gap: 24px;
+  margin-top: 28px;
+}
+
+// ── Global mat-card overrides ──────────────────────────────────────
+mat-card, .mat-mdc-card {
+  --mdc-elevated-card-container-shape: var(--app-card-radius) !important;
+  --mdc-outlined-card-container-shape: var(--app-card-radius) !important;
+  box-shadow: var(--app-card-shadow) !important;
+  border: 1px solid var(--mat-sys-outline-variant) !important;
+  transition: box-shadow var(--app-transition-speed) ease,
+              transform var(--app-transition-speed) ease,
+              background-color var(--app-transition-speed) ease,
+              border-color var(--app-transition-speed) ease;
+}
+
+// ── Global table overrides ─────────────────────────────────────────
+.mat-mdc-header-row {
+  background: var(--app-table-header-bg) !important;
+}
+
+.mat-mdc-header-cell {
+  font-weight: 600 !important;
+  color: var(--mat-sys-on-surface-variant) !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background: var(--app-table-stripe);
+}
+
+// ── Scrollbar styling ──────────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mat-sys-outline-variant);
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--mat-sys-outline);
+  }
+}
+
+// ── ngx-charts dark mode compatibility ─────────────────────────────
+.ngx-charts {
+  text {
+    fill: var(--app-chart-text) !important;
+  }
+
+  .gridline-path {
+    stroke: var(--app-chart-grid) !important;
+  }
+
+  .refline-path {
+    stroke: var(--app-chart-grid) !important;
+  }
+}
+
+// ── Page entry animation ───────────────────────────────────────────
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ── Responsive ─────────────────────────────────────────────────────
+@media (max-width: 959px) {
+  .page-container {
+    padding: 20px 16px;
+  }
+
+  .chart-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 599px) {
+  .page-container {
+    padding: 16px 12px;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  // Dialog width on mobile
+  .cdk-overlay-pane {
+    max-width: 100vw !important;
+  }
+}
+
+// Make ngx-charts fill container width when no [view] given
+.chart-content {
+  ngx-charts-line-chart,
+  ngx-charts-bar-horizontal,
+  ngx-charts-bar-vertical-stacked,
+  ngx-charts-area-chart {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "hosting": {
+    "target": "capacity-dashboard",
+    "public": "dist/capacity-dashboard/browser",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
